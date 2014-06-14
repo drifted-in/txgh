@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>TransifexServlet</servlet-name>
+        <servlet-class>in.drifted.txgh.TransifexServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>GitHubServlet</servlet-name>
+        <servlet-class>in.drifted.txgh.GitHubServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TransifexServlet</servlet-name>
+        <url-pattern>/transifex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GitHubServlet</servlet-name>
+        <url-pattern>/github</url-pattern>
+    </servlet-mapping>
+</web-app>
