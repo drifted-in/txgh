@@ -57,7 +57,7 @@ When this app is deployed to e.g. `http://drifted.in/txgh` then:
 
 Dependencies
 ============
-This Java app requires JDK 8, but it can be easily backported to JDK 7 if non JDK Base64 decoder is used. 
+This Java app requires JDK 8, but it can be easily backported to JDK 7 if non JDK Base64 decoder is used. In this case just replace `Base64.getDecoder().decode()` with `DatatypeConverter.parseBase64Binary()` in `GitHubApi.getFileContent()` method.
 
 All dependencies are specified in the Maven project file. This application relies especially on:
   * Eclipse EGit connector
