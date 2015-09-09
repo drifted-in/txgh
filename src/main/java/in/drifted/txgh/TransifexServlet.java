@@ -60,7 +60,7 @@ public class TransifexServlet extends HttpServlet {
                 LOGGER.debug("Not yet completed... " + reviewed);
             }
 
-        } else {            
+        } else {
             LOGGER.debug("Ignoring unimportant request...");
         }
     }

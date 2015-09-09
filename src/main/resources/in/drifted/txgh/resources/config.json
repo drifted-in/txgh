@@ -2,6 +2,7 @@
     "gitHubProjectConfigMap" : {
         "https://github.com/drifted-in/project" : {
             "gitHubCredentials" : {"username" : "github-user", "password" : "github-password"},
+            "gitHubUser" : {"name" : "github-user-name", "email" : "github-user-email"},
             "transifexProjectName" : "transifex-project"
         }
     },

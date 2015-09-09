@@ -35,7 +35,7 @@ public class GitHubProject {
     }
     
     public GitHubApi getGitHubApi() {
-        return new GitHubApi(config.getGitHubCredentials());
+        return new GitHubApi(config);
     }
 
     public String getProjectUrl() {

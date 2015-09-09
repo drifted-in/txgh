@@ -16,7 +16,6 @@
 package in.drifted.txgh.model;
 
 import in.drifted.txgh.TransifexApi;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,13 +38,13 @@ public class TransifexProject {
     }
 
     public Map<String, TransifexResource> getSourceFileMap() {
-        
+
         Map<String, TransifexResource> sourceFileMap = new HashMap<>();
-        
+
         for (TransifexResource transifexResource : transifexConfig.getResourceMap().values()) {
             sourceFileMap.put(transifexResource.getSourceFile(), transifexResource);
         }
-        
+
         return sourceFileMap;
     }
 
@@ -53,7 +52,7 @@ public class TransifexProject {
         Map<String, String> languageMap = transifexConfig.getLanguageMap();
         return languageMap.containsKey(language) ? languageMap.get(language) : language;
     }
-    
+
     public TransifexApi getTransifexApi() {
         return new TransifexApi(transifexCredentials);
     }

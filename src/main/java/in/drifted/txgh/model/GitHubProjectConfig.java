@@ -19,24 +19,30 @@ public class GitHubProjectConfig {
 
     private String gitHubProjectUrl;
     private final GitHubCredentials gitHubCredentials;
+    private final GitHubUser gitHubUser;
     private final String transifexProjectName;
 
-    public GitHubProjectConfig(String gitHubProjectUrl, GitHubCredentials gitHubCredentials, String transifexProjectName) {
+    public GitHubProjectConfig(String gitHubProjectUrl, GitHubCredentials gitHubCredentials, GitHubUser gitHubUser, String transifexProjectName) {
         this.gitHubProjectUrl = gitHubProjectUrl;
         this.gitHubCredentials = gitHubCredentials;
+        this.gitHubUser = gitHubUser;
         this.transifexProjectName = transifexProjectName;
     }
 
     public void setGitHubProjectUrl(String gitHubProjectUrl) {
         this.gitHubProjectUrl = gitHubProjectUrl;
     }
-    
+
     public String getGitHubProjectUrl() {
         return gitHubProjectUrl;
     }
 
     public GitHubCredentials getGitHubCredentials() {
         return gitHubCredentials;
+    }
+
+    public GitHubUser getGitHubUser() {
+        return gitHubUser;
     }
 
     public String getTransifexProjectName() {

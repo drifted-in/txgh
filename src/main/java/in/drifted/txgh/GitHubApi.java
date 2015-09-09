@@ -17,15 +17,19 @@ package in.drifted.txgh;
 
 import in.drifted.txgh.model.GitHubCredentials;
 import in.drifted.txgh.model.GitHubProject;
+import in.drifted.txgh.model.GitHubProjectConfig;
+import in.drifted.txgh.model.GitHubUser;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.Commit;
+import org.eclipse.egit.github.core.CommitUser;
 import org.eclipse.egit.github.core.Reference;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
@@ -41,15 +45,32 @@ import org.slf4j.LoggerFactory;
 public class GitHubApi {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GitHubApi.class);
-    private final GitHubClient client;
+    private final GitHubClient gitHubClient;
     private final RepositoryService repositoryService;
     private final DataService dataService;
+    private final CommitUser gitHubCommitUser;
 
-    public GitHubApi(GitHubCredentials credentials) {
-        client = new GitHubClient();
-        client.setCredentials(credentials.getUsername(), credentials.getPassword());
-        repositoryService = new RepositoryService(client);
-        dataService = new DataService(client);
+    public GitHubApi(GitHubProjectConfig config) {
+
+        GitHubCredentials gitHubCredentials = config.getGitHubCredentials();
+        GitHubUser gitHubUser = config.getGitHubUser();
+
+        gitHubClient = new GitHubClient();
+        gitHubClient.setCredentials(gitHubCredentials.getUsername(), gitHubCredentials.getPassword());
+        this.gitHubCommitUser = getGitHubCommitUser(gitHubUser.getName(), gitHubUser.getEmail());
+        repositoryService = new RepositoryService(gitHubClient);
+        dataService = new DataService(gitHubClient);
+    }
+
+    private CommitUser getGitHubCommitUser(String name, String email) {
+
+        CommitUser commitUser = new CommitUser();
+
+        commitUser.setName(name);
+        commitUser.setEmail(email);
+        commitUser.setDate(Calendar.getInstance().getTime());
+
+        return commitUser;
     }
 
     public Repository getRepository(String gitHubUrl) throws IOException {
@@ -103,6 +124,8 @@ public class GitHubApi {
 
         Commit commit = new Commit();
         commit.setMessage("Updating translations for " + path);
+        commit.setAuthor(gitHubCommitUser);
+        commit.setCommitter(gitHubCommitUser);
         commit.setTree(tree);
         List<Commit> parentCommitList = new ArrayList<>();
         parentCommitList.add(baseCommit);
