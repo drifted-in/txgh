@@ -14,12 +14,13 @@ Configuration
 =============
 For correct functionality it is necessary to set up both Transifex and GitHub hooks in your projects settings. The mapping between both projects is specified in a special JSON configuration file. 
 
-This file is stored in `/src/main/resources/in/drifted/txgh/resources/config.json`. It specifies the project name, credentials, the project to synchronize and in case of Transifex projects also a special resources configuration file.
+This file is stored in `/src/main/resources/in/drifted/txgh/resources/config.json`. It specifies the project name, credentials, the commit user (both name and email address has to match the GitHub account), the project to synchronize and in case of Transifex projects also a special resources configuration file.
 
     {
         "gitHubProjectConfigMap" : {
             "https://github.com/drifted-in/project" : {
                 "gitHubCredentials" : {"username" : "github-user", "password" : "github-password"},
+                "gitHubUser" : {"name" : "github-user-name", "email" : "github-user-email"},
                 "transifexProjectName" : "transifex-project"
             }
         },
@@ -33,7 +34,7 @@ This file is stored in `/src/main/resources/in/drifted/txgh/resources/config.jso
         }
     }
 
-The [Transifex configuration file](http://support.transifex.com/customer/portal/articles/1000855-configuring-the-client) specifies available resources for the given project, file naming conventions and the source file format. Exactly the same configuration file is used by Transifex client application. All these configuration files are supposed to be located in the `/src/main/resources/in/drifted/txgh/resources/` folder.
+The [Transifex configuration file](http://docs.transifex.com/client/config/) specifies available resources for the given project, file naming conventions and the source file format. Exactly the same configuration file is used by Transifex client application. All these configuration files are supposed to be located in the `/src/main/resources/in/drifted/txgh/resources/` folder.
 
     [main]
     host = https://www.transifex.com
